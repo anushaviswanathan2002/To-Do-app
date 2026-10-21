@@ -34,6 +34,10 @@ export default function App() {
     setTodos(todos.filter((_, idx) => idx !== i));
   }
 
+  const doneCount = todos.filter((t) => t.done).length;
+  const total = todos.length;
+  const percent = total === 0 ? 0 : Math.round((doneCount / total) * 100);
+
   return (
     <div className="app">
       <h1>📝 To-Do List</h1>
@@ -47,6 +51,19 @@ export default function App() {
         />
         <button type="submit">Add</button>
       </form>
+      {total > 0 && (
+        <div className="progress">
+          <div className="progress-meta">
+            <span>
+              {doneCount} of {total} done
+            </span>
+            <span>{percent}%</span>
+          </div>
+          <div className="progress-bar">
+            <div className="progress-fill" style={{ width: `${percent}%` }} />
+          </div>
+        </div>
+      )}
       <ul>
         {todos.map((todo, i) => (
           <li key={i} className={todo.done ? 'done' : ''}>

@@ -6,6 +6,7 @@ A basic to-do list app built with **React + Vite**.
 - Add tasks
 - Mark tasks as done
 - Delete tasks
+- Task counter and progress bar (X of Y done, %)
 - Persists in `localStorage`
 
 ## Stack
