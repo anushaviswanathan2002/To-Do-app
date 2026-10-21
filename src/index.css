@@ -6,6 +6,11 @@ body {
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
+  transition: background 0.25s, color 0.25s;
+}
+body.dark {
+  background: #1a1d23;
+  color: #e4e6eb;
 }
 #root { width: 100%; display: flex; justify-content: center; }
 .app {
@@ -16,7 +21,35 @@ body {
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
-h1 { margin: 0 0 1rem; font-size: 1.5rem; }
+body.dark .app {
+  background: #252932;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.theme-toggle {
+  background: #f5f6fa;
+  border: 1px solid #d0d4dd;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+}
+.theme-toggle:hover { background: #eceef5; }
+body.dark .theme-toggle {
+  background: #2d3139;
+  border-color: #3d4149;
+}
+body.dark .theme-toggle:hover { background: #3a3f48; }
+
+h1 { margin: 0; font-size: 1.5rem; }
 form {
   display: flex;
   gap: 0.5rem;
@@ -28,6 +61,13 @@ input[type="text"] {
   border: 1px solid #d0d4dd;
   border-radius: 8px;
   font-size: 1rem;
+  background: #fff;
+  color: #2d3436;
+}
+body.dark input[type="text"] {
+  background: #2d3139;
+  border-color: #3d4149;
+  color: #e4e6eb;
 }
 button {
   padding: 0.6rem 0.9rem;
@@ -49,6 +89,10 @@ li {
   border-radius: 8px;
   margin-bottom: 0.5rem;
   background: #fafafa;
+}
+body.dark li {
+  background: #2d3139;
+  border-color: #3d4149;
 }
 li.done span { text-decoration: line-through; color: #9ca3af; }
 li span { cursor: pointer; flex: 1; }
