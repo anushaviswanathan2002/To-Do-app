@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Pomodoro from './Pomodoro.jsx';
 
 const STORAGE_KEY = 'todos';
 
@@ -22,16 +23,16 @@ export default function App() {
     e.preventDefault();
     const trimmed = text.trim();
     if (!trimmed) return;
-    setTodos([...todos, { text: trimmed, done: false }]);
+    setTodos([...todos, { id: Date.now() + Math.random(), text: trimmed, done: false }]);
     setText('');
   }
 
-  function toggleTodo(i) {
-    setTodos(todos.map((t, idx) => (idx === i ? { ...t, done: !t.done } : t)));
+  function toggleTodo(id) {
+    setTodos(todos.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
   }
 
-  function deleteTodo(i) {
-    setTodos(todos.filter((_, idx) => idx !== i));
+  function deleteTodo(id) {
+    setTodos(todos.filter((t) => t.id !== id));
   }
 
   return (
@@ -48,16 +49,18 @@ export default function App() {
         <button type="submit">Add</button>
       </form>
       <ul>
-        {todos.map((todo, i) => (
-          <li key={i} className={todo.done ? 'done' : ''}>
-            <span onClick={() => toggleTodo(i)}>{todo.text}</span>
-            <button className="delete" onClick={() => deleteTodo(i)}>
+        {todos.map((todo) => (
+          <li key={todo.id} className={todo.done ? 'done' : ''}>
+            <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
+            <button className="delete" onClick={() => deleteTodo(todo.id)}>
               Delete
             </button>
           </li>
         ))}
       </ul>
       {todos.length === 0 && <p className="empty">No tasks yet. Add one above!</p>}
+
+      <Pomodoro tasks={todos} />
     </div>
   );
 }
