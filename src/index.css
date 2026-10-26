@@ -11,7 +11,7 @@ body {
 .app {
   background: #fff;
   width: 100%;
-  max-width: 480px;
+  max-width: 540px;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
@@ -43,15 +43,15 @@ ul { list-style: none; padding: 0; margin: 0; }
 li {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
   padding: 0.6rem 0.8rem;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   margin-bottom: 0.5rem;
   background: #fafafa;
 }
-li.done span { text-decoration: line-through; color: #9ca3af; }
-li span { cursor: pointer; flex: 1; }
+li.done .text { text-decoration: line-through; color: #9ca3af; }
+.text { cursor: pointer; flex: 1; min-width: 0; word-break: break-word; }
 .delete {
   background: transparent;
   color: #ef4444;
@@ -60,3 +60,115 @@ li span { cursor: pointer; flex: 1; }
 }
 .delete:hover { background: transparent; text-decoration: underline; }
 .empty { text-align: center; color: #9ca3af; padding: 1rem 0; }
+
+/* ---------- Filters (All / Active / Completed tabs) ---------- */
+.filters {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.tab {
+  background: transparent;
+  color: #4b5563;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+}
+.tab:hover { background: #f3f4f6; }
+.tab.active {
+  background: #4f46e5;
+  color: #fff;
+}
+.tab.active:hover { background: #4338ca; }
+.tab .count {
+  opacity: 0.75;
+  margin-left: 0.2rem;
+  font-size: 0.8rem;
+}
+
+/* ---------- Search ---------- */
+.search {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #d0d4dd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+}
+.search:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* ---------- Toolbar (counts + Clear completed) ---------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+.clear {
+  background: transparent;
+  color: #4f46e5;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+}
+.clear:hover:not(:disabled) {
+  background: #eef2ff;
+  text-decoration: underline;
+}
+.clear:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* ---------- Priority dot ---------- */
+.dot {
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #d1d5db;
+  background: #e5e7eb;
+  transition: transform 0.1s ease;
+}
+.dot:hover { transform: scale(1.15); }
+.dot-low  { background: #10b981; border-color: #059669; }
+.dot-med  { background: #f59e0b; border-color: #d97706; }
+.dot-high { background: #ef4444; border-color: #dc2626; }
+.dot-none { background: transparent; border: 1px dashed #cbd5e1; }
+
+/* ---------- Due date input ---------- */
+.due {
+  border: 1px solid #d0d4dd;
+  border-radius: 6px;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+}
+.due:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+/* ---------- Overdue / Due-today flag colors ---------- */
+li.overdue {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+li.overdue .text { color: #b91c1c; font-weight: 500; }
+li.due-today {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+li.due-today .text { color: #92400e; font-weight: 500; }
