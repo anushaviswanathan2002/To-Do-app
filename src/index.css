@@ -11,7 +11,7 @@ body {
 .app {
   background: #fff;
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
@@ -49,9 +49,10 @@ li {
   border-radius: 8px;
   margin-bottom: 0.5rem;
   background: #fafafa;
+  gap: 0.5rem;
 }
-li.done span { text-decoration: line-through; color: #9ca3af; }
-li span { cursor: pointer; flex: 1; }
+li.done .todo-text { text-decoration: line-through; color: #9ca3af; }
+.todo-text { cursor: pointer; flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .delete {
   background: transparent;
   color: #ef4444;
@@ -60,3 +61,123 @@ li span { cursor: pointer; flex: 1; }
 }
 .delete:hover { background: transparent; text-decoration: underline; }
 .empty { text-align: center; color: #9ca3af; padding: 1rem 0; }
+
+/* Filter tabs */
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: #f1f2f6;
+  border-radius: 10px;
+  padding: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+.tab {
+  flex: 1;
+  background: transparent;
+  color: #4b5563;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+.tab:hover { background: #e5e7eb; }
+.tab.active {
+  background: #fff;
+  color: #4f46e5;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.tab .count {
+  background: #e5e7eb;
+  color: #4b5563;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 1.4rem;
+  padding: 0.05rem 0.35rem;
+  text-align: center;
+}
+.tab.active .count { background: #4f46e5; color: #fff; }
+
+/* Search + clear completed */
+.search-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.search {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #d0d4dd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.clear-completed {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.7rem;
+  white-space: nowrap;
+}
+.clear-completed:hover:not(:disabled) { background: #e0e7ff; }
+.clear-completed:disabled {
+  background: #f3f4f6;
+  color: #b6bac4;
+  cursor: not-allowed;
+}
+
+/* Priority dot */
+.priority-dot {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  flex: 0 0 auto;
+  align-self: center;
+}
+.priority-dot:hover { filter: brightness(0.9); }
+.priority-low { background: #22c55e; }
+.priority-med { background: #f59e0b; }
+.priority-high { background: #ef4444; }
+
+/* Due date */
+.due-input {
+  border: 1px solid #d0d4dd;
+  border-radius: 6px;
+  padding: 0.25rem 0.35rem;
+  font-size: 0.8rem;
+  color: #374151;
+  background: #fff;
+}
+.clear-due {
+  background: transparent;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.1rem 0.35rem;
+}
+.clear-due:hover { background: transparent; color: #ef4444; }
+
+/* Due status */
+.due-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+}
+.due-badge.overdue { background: #fee2e2; color: #b91c1c; }
+.due-badge.today { background: #fef3c7; color: #b45309; }
+li.overdue { border-color: #fca5a5; background: #fef2f2; }
+li.today { border-color: #fcd34d; background: #fffbeb; }
+li.overdue .todo-text { color: #b91c1c; }
+li.today .todo-text { color: #92400e; }
+li.overdue.done .todo-text,
+li.today.done .todo-text { color: #9ca3af; }
