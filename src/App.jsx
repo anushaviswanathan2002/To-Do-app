@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const STORAGE_KEY = 'todos';
+const THEME_KEY = 'todos-theme';
 
 function loadTodos() {
   try {
@@ -10,13 +11,23 @@ function loadTodos() {
   }
 }
 
+function loadTheme() {
+  return localStorage.getItem(THEME_KEY) === 'dark';
+}
+
 export default function App() {
   const [todos, setTodos] = useState(loadTodos);
   const [text, setText] = useState('');
+  const [dark, setDark] = useState(loadTheme);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', dark);
+    localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
+  }, [dark]);
 
   function addTodo(e) {
     e.preventDefault();
@@ -36,7 +47,16 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>📝 To-Do List</h1>
+      <div className="header-row">
+        <h1>📝 To-Do List</h1>
+        <button
+          className="theme-toggle"
+          onClick={() => setDark((d) => !d)}
+          aria-label="Toggle dark mode"
+        >
+          {dark ? '☀️' : '🌙'}
+        </button>
+      </div>
       <form onSubmit={addTodo}>
         <input
           type="text"
