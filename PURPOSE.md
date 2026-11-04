@@ -8,6 +8,8 @@ It provides a lightweight task management tool that lets a user:
 - Add new tasks via a text input form
 - Mark tasks as done by clicking on them
 - Delete tasks via a per-item button
+- Remove every completed task at once via the "Clear completed" action
+- See how many tasks are still outstanding
 - Persist tasks across page reloads using the browser's `localStorage`
   (stored under the key `todos`)
 

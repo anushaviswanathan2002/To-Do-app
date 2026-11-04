@@ -34,6 +34,13 @@ export default function App() {
     setTodos(todos.filter((_, idx) => idx !== i));
   }
 
+  function clearCompleted() {
+    setTodos(todos.filter((t) => !t.done));
+  }
+
+  const completedCount = todos.filter((t) => t.done).length;
+  const remainingCount = todos.length - completedCount;
+
   return (
     <div className="app">
       <h1>📝 To-Do List</h1>
@@ -58,6 +65,21 @@ export default function App() {
         ))}
       </ul>
       {todos.length === 0 && <p className="empty">No tasks yet. Add one above!</p>}
+      {todos.length > 0 && (
+        <div className="actions">
+          <span className="count">
+            {remainingCount} {remainingCount === 1 ? 'task' : 'tasks'} left
+          </span>
+          <button
+            type="button"
+            className="clear"
+            onClick={clearCompleted}
+            disabled={completedCount === 0}
+          >
+            Clear completed
+          </button>
+        </div>
+      )}
     </div>
   );
 }

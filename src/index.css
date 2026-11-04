@@ -60,3 +60,31 @@ li span { cursor: pointer; flex: 1; }
 }
 .delete:hover { background: transparent; text-decoration: underline; }
 .empty { text-align: center; color: #9ca3af; padding: 1rem 0; }
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+.count { color: #6b7280; font-size: 0.9rem; }
+.clear {
+  background: transparent;
+  color: #ef4444;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #fca5a5;
+}
+.clear:hover:not(:disabled) { background: #fef2f2; }
+.clear:disabled {
+  color: #d1d5db;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
